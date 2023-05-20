@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  postgresqik:
+    image: postgres:latest
+    environment:
+      - name=value
+      - POSTGRES_DB=taxi24
+      - POSTGRES_USER=qikuser
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data: {}
