@@ -21,10 +21,7 @@ export class Factura {
   descripcion: string;
 
   @Column({ type: 'float' })
-  latitudorigen: number;
-
-  @Column({ type: 'float' })
-  impuesto: number;
+  valorimpuesto: number;
 
   @Column({ type: 'float' })
   descuento: number;

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Conductor } from './conductor.entity';
@@ -11,9 +11,7 @@ export class ConductoresService {
     private conductorRepository: Repository<Conductor>,
   ) {}
   obtenerConductores(): Promise<Conductor[]> {
-    return this.conductorRepository.find({
-      // select: ['nombres', 'apellidos']
-    });
+    return this.conductorRepository.find();
   }
 
   obtenerConductorPorId(id: number) {
@@ -28,8 +26,17 @@ export class ConductoresService {
 
   obtenerConductoresDisponibles() {
     const conductor = this.conductorRepository.find({
+      select: [
+        'id',
+        'nombres',
+        'apellidos',
+        'dni',
+        'disponible',
+        'latitud',
+        'longitud',
+      ],
       where: {
-        estado: '1',
+        disponible: true,
       },
     });
 
@@ -38,5 +45,46 @@ export class ConductoresService {
     }
 
     return conductor;
+  }
+
+  async obtenerConductoresDisponibles3Kilometros(
+    latitud: number,
+    longitud: number,
+  ) {
+    let conductoresHabilitados = [];
+    const conductores = await this.conductorRepository.find({
+      where: {
+        disponible: true,
+      },
+    });
+    Object.entries(conductores).forEach(([key, value]) => {
+      if (
+        this.calcularDistanciaKilometros(
+          latitud,
+          longitud,
+          value.latitud,
+          value.longitud,
+          3,
+        )
+      ) {
+        conductoresHabilitados.push(value);
+      }
+    });
+    return conductoresHabilitados;
+  }
+
+  private calcularDistanciaKilometros(
+    latitudOrigen,
+    longitudOrigen,
+    latitudDestino,
+    longitudDestino,
+    distanciaMinima,
+  ) {
+    const potenciaLatitud = Math.pow(latitudDestino - latitudOrigen, 2);
+    const potenciaLongitud = Math.pow(longitudDestino - longitudOrigen, 2);
+    const raiz = Math.sqrt(potenciaLatitud + potenciaLongitud);
+    const distancia = raiz * 100;
+
+    return distancia <= distanciaMinima ? true : false;
   }
 }

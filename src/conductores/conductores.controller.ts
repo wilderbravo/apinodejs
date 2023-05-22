@@ -1,6 +1,15 @@
 import { ConductoresService } from './conductores.service';
 import { ParseIntPipe } from '../common/parse-int.pipe';
-import { Controller, Get, Param, HttpStatus, HttpCode } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  HttpStatus,
+  HttpCode,
+  ParseFloatPipe,
+  Query,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 @ApiTags('conductores')
 @Controller('conductores')
@@ -14,13 +23,27 @@ export class ConductoresController {
   }
 
   @Get('disponibles')
-  @ApiOperation({ summary: 'Lista de conductores disponibles' })
+  @ApiOperation({ summary: 'Lista de conductores disponibles para un viaje' })
   getConductoresDisponibles() {
     return this.conductoresService.obtenerConductoresDisponibles();
   }
 
+  @Post('disponibles')
+  @ApiOperation({
+    summary: 'Lista de conductores ubicados a un rango de 3 kilómetros',
+  })
+  async getDatos(
+    @Query('latitud', ParseFloatPipe) latitud: 100,
+    @Query('longitud', ParseFloatPipe) longitud: 100,
+  ) {
+    return await this.conductoresService.obtenerConductoresDisponibles3Kilometros(
+      latitud,
+      longitud,
+    );
+  }
+
   @Get(':conductorId')
-  @HttpCode(HttpStatus.ACCEPTED)
+  @ApiOperation({ summary: 'Lista de conductores filtrado por ID' })
   getConductorPorId(@Param('conductorId', ParseIntPipe) conductorId: number) {
     return this.conductoresService.obtenerConductorPorId(conductorId);
   }

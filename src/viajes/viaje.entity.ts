@@ -39,6 +39,9 @@ export class Viaje {
   @Column({ type: 'float' })
   total: number;
 
+  @Column({ type: 'varchar', length: 1 })
+  estado: number;
+
   @ManyToOne(() => Conductor, (conductor) => conductor.viajes)
   conductor: Conductor[];
 
