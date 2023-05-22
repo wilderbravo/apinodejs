@@ -11,11 +11,13 @@ export class ConductoresService {
     private conductorRepository: Repository<Conductor>,
   ) {}
   obtenerConductores(): Promise<Conductor[]> {
-    return this.conductorRepository.find();
+    return this.conductorRepository.find({
+      // select: ['nombres', 'apellidos']
+    });
   }
 
-  buscarConductorPorId(id: number) {
-    const conductor = this.conductorRepository.findOneBy({id:id})// findOneById()
+  obtenerConductorPorId(id: number) {
+    const conductor = this.conductorRepository.findOneBy({ id: id }); // findOneById()
 
     if (!conductor) {
       throw new NotFoundException(`Conductor con id ${id} no encontrado`);
@@ -24,8 +26,17 @@ export class ConductoresService {
     return conductor;
   }
 
-  // createCompetition(competition:CreateCompetitionInput): Promise<Competition> {
-  //     const newCompetition = this.competitionRepository.create(competition);
-  //     return this.competitionRepository.save(newCompetition);
-  // }
+  obtenerConductoresDisponibles() {
+    const conductor = this.conductorRepository.find({
+      where: {
+        estado: '1',
+      },
+    });
+
+    if (!conductor) {
+      throw new NotFoundException(`Conductores disponibles no encontrados`);
+    }
+
+    return conductor;
+  }
 }

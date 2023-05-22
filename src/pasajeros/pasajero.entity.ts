@@ -1,7 +1,7 @@
-import { PrimaryGeneratedColumn, Entity, Column, OneToMany } from 'typeorm';
 import { Viaje } from '../viajes/viaje.entity';
-@Entity({ name: 'conductores' })
-export class Conductor {
+import { PrimaryGeneratedColumn, Entity, Column, OneToMany } from 'typeorm';
+@Entity({ name: 'pasajeros' })
+export class Pasajero {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,6 +20,6 @@ export class Conductor {
   @Column({ type: 'char', length: 1 })
   estado: string;
 
-  @OneToMany(() => Viaje, (viaje) => viaje.pasajero, { eager: true })
+  @OneToMany(() => Viaje, (viaje) => viaje.conductor, { eager: true })
   viajes: Viaje[];
 }
