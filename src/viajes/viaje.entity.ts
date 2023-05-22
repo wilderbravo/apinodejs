@@ -4,10 +4,12 @@ import {
   Column,
   CreateDateColumn,
   ManyToOne,
+  OneToMany
 } from 'typeorm';
 
 import { Conductor } from '../conductores/conductor.entity';
 import { Pasajero } from '../pasajeros/pasajero.entity';
+import { Factura } from 'src/facturas/factura.entity';
 @Entity({ name: 'viajes' })
 export class Viaje {
   @PrimaryGeneratedColumn()
@@ -42,5 +44,8 @@ export class Viaje {
 
   @ManyToOne(() => Pasajero, (pasajero) => pasajero.viajes)
   pasajero: Pasajero[];
+
+  @OneToMany(() => Factura, (factura) => factura.viaje, { eager: true })
+  facturas: Factura[];
 
 }

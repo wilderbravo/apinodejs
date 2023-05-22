@@ -1,8 +1,10 @@
+import { Viaje } from '../viajes/viaje.entity';
 import {
   PrimaryGeneratedColumn,
   Entity,
   Column,
   CreateDateColumn,
+  ManyToOne
 } from 'typeorm';
 @Entity({ name: 'facturas' })
 export class Factura {
@@ -32,4 +34,7 @@ export class Factura {
 
   @Column({ type: 'float' })
   total: number;
+
+  @ManyToOne(() => Viaje, (viaje) => viaje.facturas)
+  viaje: Viaje[];
 }
