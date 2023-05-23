@@ -40,7 +40,7 @@ export class Viaje {
   total: number;
 
   @Column({ type: 'varchar', length: 1 })
-  estado: number;
+  estado: string;
 
   @ManyToOne(() => Conductor, (conductor) => conductor.viajes)
   conductor: Conductor[];
@@ -50,5 +50,4 @@ export class Viaje {
 
   @OneToMany(() => Factura, (factura) => factura.viaje, { eager: true })
   facturas: Factura[];
-
 }
