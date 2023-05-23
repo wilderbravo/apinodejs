@@ -26,6 +26,5 @@ export class PasajerosService {
 
   obtenerTresPasajerosMasCerca(latitud: number, longitud: number, id: number) {
     return this.conductorService.obtenerConductoresCercanos(latitud, longitud, id);
-    // return "Hola";
   }
 }

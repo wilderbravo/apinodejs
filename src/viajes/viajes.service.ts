@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Viaje } from './viaje.entity';
 import { ActualizarViajeDto, CrearViajeDto } from './dtos/viajes.dto';
+import { FacturasService } from '../facturas/facturas.service';
 
 @Injectable()
 export class ViajesService {
   constructor(
     @InjectRepository(Viaje)
     private viajeRepository: Repository<Viaje>,
+    private facturaService: FacturasService 
   ) {}
 
   obtenerViajes(): Promise<Viaje[]> {
@@ -39,7 +41,8 @@ export class ViajesService {
     this.viajeRepository.merge(viaje, cambios);
     const viajeRegistrado = this.viajeRepository.save(viaje);
     if (viajeRegistrado) {
-      // Guardar Factura por ID
+      this.facturaService.crearFactura( (await viajeRegistrado).id );
+      return viajeRegistrado;
     }
   }
 }
