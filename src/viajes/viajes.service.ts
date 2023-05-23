@@ -37,6 +37,9 @@ export class ViajesService {
   async completarViaje(viajeId: number, cambios: ActualizarViajeDto) {
     const viaje = await this.viajeRepository.findOneBy({ id: viajeId });
     this.viajeRepository.merge(viaje, cambios);
-    return this.viajeRepository.save(viaje);
+    const viajeRegistrado = this.viajeRepository.save(viaje);
+    if (viajeRegistrado) {
+      // Guardar Factura por ID
+    }
   }
 }
