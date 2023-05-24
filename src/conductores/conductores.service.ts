@@ -9,17 +9,16 @@ export class ConductoresService {
     @InjectRepository(Conductor)
     private conductorRepository: Repository<Conductor>,
   ) {}
+
   obtenerConductores(): Promise<Conductor[]> {
     return this.conductorRepository.find();
   }
 
   obtenerConductorPorId(id: number) {
-    const conductor = this.conductorRepository.findOneBy({ id: id }); // findOneById()
-
+    const conductor = this.conductorRepository.findOneBy({ id: id });
     if (!conductor) {
       throw new NotFoundException(`Conductor con id ${id} no encontrado`);
     }
-
     return conductor;
   }
 
@@ -46,18 +45,17 @@ export class ConductoresService {
     return conductor;
   }
 
-  async obtenerConductoresDisponibles3Kilometros(
+  async obtenerConductoresDisponiblesNKilometros(
     latitud: number,
     longitud: number,
+    kilometros: number,
   ) {
     let conductoresHabilitados = [];
-
     const conductores = await this.conductorRepository.find({
       where: {
         disponible: true,
       },
     });
-
     Object.entries(conductores).forEach(([key, value]) => {
       if (
         this.calcularDistanciaKilometros(
@@ -65,7 +63,7 @@ export class ConductoresService {
           longitud,
           value.latitud,
           value.longitud,
-        ) <= 3
+        ) <= kilometros
       ) {
         conductoresHabilitados.push(value);
       }

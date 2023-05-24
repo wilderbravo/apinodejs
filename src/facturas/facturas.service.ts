@@ -24,7 +24,7 @@ export class FacturasService {
       descuento: 0.0594,
       subtotal: 1.926,
       total: 2.1906,
-      viajeId: 21,
+      viajeId: viajeId,
     };
     const dtoFactura = this.pasarDTOFactura(factura);
     const nuevaFactura = this.facturaRepository.create(dtoFactura);

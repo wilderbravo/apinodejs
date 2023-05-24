@@ -1,73 +1,86 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Taxi24 BE
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+El API de Taxi24 ha sido construida con diferentes tecnologías, las cuáles se listan a continuación:
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- [Node Js](https://nodejs.org/en)
+- [Nest Js](https://nestjs.com/)
+- [Typescript](https://www.typescriptlang.org/)
+- [TypeOrm](https://typeorm.io/)
+- [Docker](https://www.docker.com/)
+- [Postgres](https://www.postgresql.org/)
+- [Git](https://git-scm.com/)
+- [Bitbucket](https://bitbucket.org/)
+- [VsCode](https://code.visualstudio.com/)
+- [Swagger](https://swagger.io/)
 
-## Description
+Adicionalmente se debe considerar un  cliente o plugin para ejecución y prueba de los endpoints del API, para este proyecto se utiliza [Postman](https://www.postman.com/).
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Instalación
 
-## Installation
+Antes de empezar con el proyecto, se debe tener en cuenta que la la base de datos (Postgres) se está instanciando mediante un contenedor, por lo cual se debe instalar  [Docker](https://docs.docker.com/engine/install/).
+
+Posteriormente se debe descargar el proyecto que se encuentra alojado en [Bitbucket](https://bitbucket.org/), elija la ruta donde va a estar localmente el proyecto y luego escriba el siguiente comando en la consola:
 
 ```bash
-$ yarn install
+git clone https://wilderbravo@bitbucket.org/wilderbravo/taxi24.git
 ```
 
-## Running the app
+Una vez descargado el código fuente, ingrese a la carpeta del proyecto **taxi24** y luego actualice las dependencias ejecutando el comando:
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+npm install
 ```
-
-## Test
+Ahora es tiempo de hacer funcionar el motor de base de datos, para lo cual se debe ejecutar el comando:
 
 ```bash
-# unit tests
-$ yarn run test
+docker-compose up -d
+```
+Para verificar que la base de datos se encuentra funcionando bien, se puede ejecutar el comando:
+```bash
+docker-compose ps
+``` 
+Lo cual debe presentar algo similar al siguiente resultado:
+```bash
+NAME                   IMAGE               COMMAND                  SERVICE             CREATED             STATUS              PORTS
+taxi24_postgresqik_1   postgres:latest     "docker-entrypoint.s…"   postgresqik         4 days ago          Up 37 minutes       0.0.0.0:5432->5432/tcp
+``` 
+Se debe tener en cuenta que el puerto **5432** no debe estar ocupado por otra instancia o aplicación.
 
-# e2e tests
-$ yarn run test:e2e
+Utilizando un cliente de Base de Datos es posible abrir la conexión a la base de datos **taxi24** y ejecutar el archivo con los datos iniciales ubicado en la ruta:
+```bash
+/src/database/script.sql
+``` 
 
-# test coverage
-$ yarn run test:cov
+Ahora es momento de iniciar la aplicación, usando el siguiente comando:
+
+```bash
+npm run start:dev
+``` 
+Lo cual hará que la aplicación se ejecute en modo de desarrollo en el puerto 3000
+
+```bash
+http://localhost:3000
+``` 
+
+## Uso de la aplicación
+Para poder verificar el buen funcionamiento del API se debe abrir la carpeta **test** un archivo en formato json llamado **QIK.postman_collection.json** que contiene los ejemplos de las peticiones a los diferentes endpoints del API. Este archivo es posible importarlo directamente en Postman. 
+
+Si la importación no funciona, también se ha incorporado el uso de Swagger para la documentación del API, el cual se puede encontrar en la ruta:
+
+```bash
+http://localhost:3000/api
 ```
 
-## Support
+## Contribución
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Para futuras contribuciones se pueden realizar pull request que agreguen nuevas funcionalidades al aplicativo
 
-## Stay in touch
+## Licencia
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Nest is [MIT licensed](https://choosealicense.com/licenses/mit/).
 
-## License
+## Contactos
 
-Nest is [MIT licensed](LICENSE).
+- Autor - [Wilder Bravo](https://www.linkedin.com/in/wilderbravoc/)
+
+

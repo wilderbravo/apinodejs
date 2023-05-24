@@ -35,16 +35,16 @@ VALUES
   (14, 'Valentina', 'Ortiz', 18.49240856001737, -69.93061969584836, '1', '9265430718', '1993-07-08', 'F'),
   (15, 'Javier', 'Vargas', 18.493763329219803, -69.94685794501112, '1', '4032958716', '1991-10-19', 'M');
 
------- Los siguientes valores no son necesarios para iniciar la validez del proyecto, sin embargo, y para efectos 
+------ Los siguientes valores no son necesarios para iniciar el proyecto, sin embargo, y para efectos 
 ------ de validación se pueden usar para comprobar inicialmente todos los endpoints
 
 ----- ***** Insters para Viajes ***** -----
-insert into viajes (id, fecharegistro, latitudorigen, latitudestino, longitudorigen, longituddestino, costokm, total, "conductorId", "pasajeroId", estado)
-VALUES
-	(1, '2023-05-20', 18.5361206716888, 18.493763329219803, -69.942848478185, -69.94685794501112, 0.21, 2.25, 1, 1, 'I'),
-	(2, '2023-05-20', 18.4992824330177, 18.5829513230345, -69.9073598579873, -69.9305907863389, 0.21, 2.25, 1, 4, 'F');
+-- insert into viajes (id, fecharegistro, latitudorigen, latitudestino, longitudorigen, longituddestino, costokm, total, "conductorId", "pasajeroId", estado)
+-- VALUES
+-- 	(1, '2023-05-20', 18.5361206716888, 18.493763329219803, -69.942848478185, -69.94685794501112, 0.21, 2.25, 1, 1, 'I'),
+-- 	(2, '2023-05-20', 18.4992824330177, 18.5829513230345, -69.9073598579873, -69.9305907863389, 0.21, 2.25, 1, 4, 'F');
 
 ----- ***** Insters para Facturas ***** -----
-insert into facturas (id, fecharegistro, descripcion, valorimpuesto, descuento, subtotal, total, "viajeId")
-values
-	(1, '2023-05-20', 'Servicio de Transporte', 0.12, 0.0594, 1.9206, 2.1906, 2);
+-- insert into facturas (id, fecharegistro, descripcion, valorimpuesto, descuento, subtotal, total, "viajeId")
+-- values
+-- 	(1, '2023-05-20', 'Servicio de Transporte', 0.12, 0.0594, 1.9206, 2.1906, 2);

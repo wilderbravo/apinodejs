@@ -34,9 +34,10 @@ export class ConductoresController {
     @Query('latitud', ParseFloatPipe) latitud: 100,
     @Query('longitud', ParseFloatPipe) longitud: 100,
   ) {
-    return await this.conductoresService.obtenerConductoresDisponibles3Kilometros(
+    return await this.conductoresService.obtenerConductoresDisponiblesNKilometros(
       latitud,
       longitud,
+      3
     );
   }
 
