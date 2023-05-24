@@ -11,7 +11,11 @@ export class ConductoresService {
   ) {}
 
   obtenerConductores(): Promise<Conductor[]> {
-    return this.conductorRepository.find();
+    const conductores = this.conductorRepository.find();
+    if (!conductores) {
+      throw new NotFoundException(`Conductores no encontrados`);
+    }
+    return conductores;
   }
 
   obtenerConductorPorId(id: number) {
@@ -23,26 +27,15 @@ export class ConductoresService {
   }
 
   obtenerConductoresDisponibles() {
-    const conductor = this.conductorRepository.find({
-      select: [
-        'id',
-        'nombres',
-        'apellidos',
-        'dni',
-        'disponible',
-        'latitud',
-        'longitud',
-      ],
+    const conductores = this.conductorRepository.find({
       where: {
         disponible: true,
       },
     });
-
-    if (!conductor) {
+    if (!conductores) {
       throw new NotFoundException(`Conductores disponibles no encontrados`);
     }
-
-    return conductor;
+    return conductores;
   }
   async obtenerConductoresDisponiblesNKilometros(
     latitud: number,
@@ -55,6 +48,9 @@ export class ConductoresService {
         disponible: true,
       },
     });
+    if (!conductores) {
+      throw new NotFoundException(`Conductores disponibles no encontrados`);
+    }
     Object.entries(conductores).forEach(([key, value]) => {
       if (
         this.calcularDistanciaKilometros(
@@ -83,6 +79,9 @@ export class ConductoresService {
         disponible: true,
       },
     });
+    if (!conductores) {
+      throw new NotFoundException(`Conductores disponibles no encontrados`);
+    }
     Object.entries(conductores).forEach(([key, value]) => {
       const distaciaPorConductor = this.calcularDistanciaKilometros(
         latitud,

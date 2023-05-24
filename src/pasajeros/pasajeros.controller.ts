@@ -26,11 +26,9 @@ export class PasajerosController {
     @Query('latitud', ParseFloatPipe) latitud,
     @Query('longitud', ParseFloatPipe) longitud,
   ) {
-    return await this.pasajerosService.obtenerTresPasajerosMasCerca(
+    return await this.pasajerosService.obtenerTresConductoresMasCerca(
       latitud,
       longitud,
     );
   }
-
-  // Agregar try catch
 }

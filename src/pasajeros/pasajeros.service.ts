@@ -9,11 +9,15 @@ export class PasajerosService {
   constructor(
     @InjectRepository(Pasajero)
     private pasajeroRepository: Repository<Pasajero>,
-    private conductorService: ConductoresService
+    private conductorService: ConductoresService,
   ) {}
 
   obtenerPasajeros(): Promise<Pasajero[]> {
-    return this.pasajeroRepository.find();
+    const pasajeros = this.pasajeroRepository.find();
+    if (!pasajeros) {
+      throw new NotFoundException(`Pasajeros no encontrados`);
+    }
+    return pasajeros;
   }
 
   obtenerPasajeroPorId(id: number) {
@@ -24,7 +28,14 @@ export class PasajerosService {
     return pasajero;
   }
 
-  obtenerTresPasajerosMasCerca(latitud: number, longitud: number) {
-    return this.conductorService.obtenerConductoresCercanos(latitud, longitud);
+  obtenerTresConductoresMasCerca(latitud: number, longitud: number) {
+    const tresConductores = this.conductorService.obtenerConductoresCercanos(
+      latitud,
+      longitud,
+    );
+    if (!tresConductores) {
+      throw new NotFoundException(`Pasajeros no encontrados`);
+    }
+    return tresConductores;
   }
 }

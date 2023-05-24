@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Factura } from './factura.entity';
@@ -16,19 +16,32 @@ export class FacturasService {
   }
 
   crearFactura(viajeId: number) {
-    const fechaActual = new Date();
-    const factura = {
-      fecharegistro: fechaActual,
-      descripcion: 'Servicio de Transporte',
-      valorimpuesto: 0.12,
-      descuento: 0.0594,
-      subtotal: 1.926,
-      total: 2.1906,
-      viajeId: viajeId,
-    };
-    const dtoFactura = this.pasarDTOFactura(factura);
-    const nuevaFactura = this.facturaRepository.create(dtoFactura);
-    return this.facturaRepository.save(nuevaFactura);
+    try {
+      const fechaActual = new Date();
+      const factura = {
+        fecharegistro: fechaActual,
+        descripcion: 'Servicio de Transporte',
+        valorimpuesto: 0.12,
+        descuento: 0.0594,
+        subtotal: 1.926,
+        total: 2.1906,
+        viajeId: viajeId,
+      };
+      const dtoFactura = this.pasarDTOFactura(factura);
+      const nuevaFactura = this.facturaRepository.create(dtoFactura);
+      return this.facturaRepository.save(nuevaFactura);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Existen problemas al guardar la información',
+        },
+        HttpStatus.FORBIDDEN,
+        {
+          cause: error,
+        },
+      );
+    }
   }
 
   pasarDTOFactura(data: CrearFacturaDto) {

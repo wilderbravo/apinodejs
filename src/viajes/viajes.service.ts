@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Viaje } from './viaje.entity';
@@ -10,11 +15,16 @@ export class ViajesService {
   constructor(
     @InjectRepository(Viaje)
     private viajeRepository: Repository<Viaje>,
-    private facturaService: FacturasService 
+    private facturaService: FacturasService,
   ) {}
 
   obtenerViajes(): Promise<Viaje[]> {
-    return this.viajeRepository.find();
+    const viajes = this.viajeRepository.find();
+    if (!viajes) {
+      throw new NotFoundException(`Viajes no encontrados`);
+    }
+
+    return viajes;
   }
 
   obtenerViajesActivos() {
@@ -32,17 +42,43 @@ export class ViajesService {
   }
 
   crearViaje(data: CrearViajeDto) {
-    const nuevoViaje = this.viajeRepository.create(data);
-    return this.viajeRepository.save(nuevoViaje);
+    try {
+      const nuevoViaje = this.viajeRepository.create(data);
+      return this.viajeRepository.save(nuevoViaje);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Existen problemas para guardar la información',
+        },
+        HttpStatus.FORBIDDEN,
+        {
+          cause: error,
+        },
+      );
+    }
   }
 
   async completarViaje(viajeId: number, cambios: ActualizarViajeDto) {
-    const viaje = await this.viajeRepository.findOneBy({ id: viajeId });
-    this.viajeRepository.merge(viaje, cambios);
-    const viajeRegistrado = this.viajeRepository.save(viaje);
-    if (viajeRegistrado) {
-      this.facturaService.crearFactura( (await viajeRegistrado).id );
-      return viajeRegistrado;
+    try {
+      const viaje = await this.viajeRepository.findOneBy({ id: viajeId });
+      this.viajeRepository.merge(viaje, cambios);
+      const viajeRegistrado = this.viajeRepository.save(viaje);
+      if (viajeRegistrado) {
+        this.facturaService.crearFactura((await viajeRegistrado).id);
+        return viajeRegistrado;
+      }
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Existen problemas para guardar la información',
+        },
+        HttpStatus.FORBIDDEN,
+        {
+          cause: error,
+        },
+      );
     }
   }
 }
