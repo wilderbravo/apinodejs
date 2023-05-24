@@ -78,7 +78,7 @@ Si la importación no funciona, también se ha incorporado el uso de Swagger par
 http://localhost:3000/api
 ```
 ## Variables de entorno
-A continuación se detalla el uso de las variables de entorno utilizadas en el proyecto:
+A continuación se detalla el uso de las variables de entorno utilizadas en el proyecto (Tomar en cuenta los datos del archivo **docker-compose.yml** considerando un ambiente de desarrollo):
 
 **API_KEY**: Key del proyecto
 
@@ -99,9 +99,13 @@ A continuación se detalla el uso de las variables de entorno utilizadas en el p
 **IMPUESTO**: Porcentaje del impuesto para las facturas
 
 **DESCUENTO**: Porcentaje de descuento para las facturas
- ## Contribución
 
-Para futuras contribuciones se pueden realizar pull request que agreguen nuevas funcionalidades al aplicativo
+ ## Pruebas
+
+Con parte de un muestreo se han realizado unas pruebas unitarias, las cuales se pueden ejecutar con el siguiente comando:
+```bash
+npm run test
+```
 
 ## Licencia
 
