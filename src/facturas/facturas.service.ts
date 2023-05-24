@@ -15,16 +15,17 @@ export class FacturasService {
     return this.facturaRepository.find();
   }
 
-  crearFactura(viajeId: number) {
+  crearFactura(viajeId: number, total: number) {
     try {
       const fechaActual = new Date();
+      const [descuento, impuesto, subtotal, totalPagar] = this.calcuarValoresFactura(total);
       const factura = {
         fecharegistro: fechaActual,
         descripcion: 'Servicio de Transporte',
-        valorimpuesto: 0.12,
-        descuento: 0.0594,
-        subtotal: 1.926,
-        total: 2.1906,
+        valorimpuesto: impuesto,
+        descuento: descuento,
+        subtotal: subtotal,
+        total: totalPagar,
         viajeId: viajeId,
       };
       const dtoFactura = this.pasarDTOFactura(factura);
@@ -42,6 +43,21 @@ export class FacturasService {
         },
       );
     }
+  }
+
+  calcuarValoresFactura(subtotal: number) {
+    const porcentaje_impuesto = parseFloat(process.env.IMPUESTO);
+    const porcentaje_descuento = parseFloat(process.env.DESCUENTO);
+    const valor_descuento = subtotal * porcentaje_descuento;
+    const valor_antes_impuesto = subtotal - valor_descuento;
+    const valor_impuesto = valor_antes_impuesto * porcentaje_impuesto;
+
+    return [
+      valor_descuento,
+      valor_impuesto,
+      valor_antes_impuesto,
+      valor_antes_impuesto + valor_impuesto,
+    ];
   }
 
   pasarDTOFactura(data: CrearFacturaDto) {

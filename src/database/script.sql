@@ -1,5 +1,6 @@
 ----- ***** Insters para Conductores ***** -----
 insert into conductores (id, nombres, apellidos, dni, disponible, fechanacimiento, sexo, latitud, longitud, estado) 
+VALUES
 (1, 'Wilder','Bravo', '1234567890',true, '1984-05-24', 'H', 18.534769855329, -69.941407771272, 1),
 (2, 'Juan','Pérez','9876543210' ,true,'1984-05-24','H',18.537089563153, -69.937106084814, 1),
 (3, 'Ana','Sánchez','2468135790' ,true,'1984-05-24','M',18.5380833289648, -69.9412245801416, 1),

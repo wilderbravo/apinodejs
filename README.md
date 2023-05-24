@@ -17,7 +17,8 @@ Adicionalmente se debe considerar un  cliente o plugin para ejecución y prueba 
 
 ## Instalación
 
-Antes de empezar con el proyecto, se debe tener en cuenta que la la base de datos (Postgres) se está instanciando mediante un contenedor, por lo cual se debe instalar  [Docker](https://docs.docker.com/engine/install/).
+Antes de empezar con el proyecto, se debe tener en cuenta que la la base de datos (Postgres) se está instanciando mediante un contenedor, por lo cual se debe instalar [Docker](https://docs.docker.com/engine/install/) primero.
+
 
 Posteriormente se debe descargar el proyecto que se encuentra alojado en [Bitbucket](https://bitbucket.org/), elija la ruta donde va a estar localmente el proyecto y luego escriba el siguiente comando en la consola:
 
@@ -25,8 +26,14 @@ Posteriormente se debe descargar el proyecto que se encuentra alojado en [Bitbuc
 git clone https://wilderbravo@bitbucket.org/wilderbravo/taxi24.git
 ```
 
-Tomar en cuenta que la rama principal es la rama **master**. Una vez descargado el código fuente, ingrese a la carpeta del proyecto **taxi24** y luego actualice las dependencias ejecutando el comando:
+Tomar en cuenta que la rama principal es la rama **master**. Una vez descargado el código fuente, ingrese a la carpeta del proyecto **taxi24**.
 
+La versión de NodeJs utilizada es la **18.14.2**, la cual se puede instalar por defecto como principal o, intercambiar de versión usando [nvm](https://nvm.sh) en la raíz del proyecto, con el siguiente comando
+
+```bash
+nvm use
+```
+Luego acutalice las dependencias:
 ```bash
 npm install
 ```
@@ -70,8 +77,30 @@ Si la importación no funciona, también se ha incorporado el uso de Swagger par
 ```bash
 http://localhost:3000/api
 ```
+## Variables de entorno
+A continuación se detalla el uso de las variables de entorno utilizadas en el proyecto:
 
-## Contribución
+**API_KEY**: Key del proyecto
+
+**DATABASE_NAME**: Base de datos del proyecto
+
+**DATABASE_PORT**: Puerto de la base de datos
+
+**POSTGRESS_DB**: Nombre de la base de datos
+
+**POSTGRESS_USER**: Usuario de Postgres para acceder a la base de datos
+
+**POSTGRESS_PASSWORD**: Password de la base de datos
+
+**POSTGRESS_PORT**: Puerto de la base de datos
+
+**POSTGRESS_HOST**: Host del servidor de base de datos
+
+**IMPUESTO**: Porcentaje del impuesto para las facturas
+
+**DESCUENTO**: Porcentaje de descuento para las facturas
+#
+ ## Contribución
 
 Para futuras contribuciones se pueden realizar pull request que agreguen nuevas funcionalidades al aplicativo
 

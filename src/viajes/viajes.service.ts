@@ -65,7 +65,10 @@ export class ViajesService {
       this.viajeRepository.merge(viaje, cambios);
       const viajeRegistrado = this.viajeRepository.save(viaje);
       if (viajeRegistrado) {
-        this.facturaService.crearFactura((await viajeRegistrado).id);
+        this.facturaService.crearFactura(
+          (await viajeRegistrado).id,
+          (await viajeRegistrado).total,
+        );
         return viajeRegistrado;
       }
     } catch (error) {

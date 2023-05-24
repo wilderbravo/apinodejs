@@ -16,7 +16,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Bienvenido al API de Taxi24!"', () => {
-      expect(appController.getHome).toBe('Bienvenido al API de Taxi24!');
+      expect(appController.getHome()).toBe('Bienvenido al API de Taxi24!');
     });
   });
 });
