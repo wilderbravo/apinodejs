@@ -56,7 +56,7 @@ Ahora es momento de iniciar la aplicación, usando el siguiente comando:
 ```bash
 npm run start:dev
 ``` 
-Lo cual hará que la aplicación se ejecute en modo de desarrollo en el puerto 3000
+Lo cual hará que la aplicación se ejecute en modo de desarrollo en el puerto 3000, mostrando un mensaje que dice **Bienvenido al API de Taxi24!**
 
 ```bash
 http://localhost:3000

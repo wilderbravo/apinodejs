@@ -7,6 +7,8 @@ import { PasajerosModule } from './pasajeros/pasajeros.module';
 import { FacturasModule } from './facturas/facturas.module';
 import { DatabaseModule } from './database/database.module';
 import config from 'config';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,7 +22,7 @@ import config from 'config';
     FacturasModule,
     DatabaseModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
