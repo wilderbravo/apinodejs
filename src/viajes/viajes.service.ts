@@ -63,7 +63,7 @@ export class ViajesService {
     try {
       const viaje = await this.viajeRepository.findOneBy({ id: viajeId });
       this.viajeRepository.merge(viaje, cambios);
-      const viajeRegistrado = this.viajeRepository.save(viaje);
+      const viajeRegistrado = await this.viajeRepository.save(viaje);
       if (viajeRegistrado) {
         this.facturaService.crearFactura(
           (await viajeRegistrado).id,

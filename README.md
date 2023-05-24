@@ -99,7 +99,7 @@ A continuación se detalla el uso de las variables de entorno utilizadas en el p
 **IMPUESTO**: Porcentaje del impuesto para las facturas
 
 **DESCUENTO**: Porcentaje de descuento para las facturas
-#
+
  ## Contribución
 
 Para futuras contribuciones se pueden realizar pull request que agreguen nuevas funcionalidades al aplicativo

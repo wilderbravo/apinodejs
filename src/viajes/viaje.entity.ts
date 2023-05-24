@@ -9,7 +9,7 @@ import {
 
 import { Conductor } from '../conductores/conductor.entity';
 import { Pasajero } from '../pasajeros/pasajero.entity';
-import { Factura } from 'src/facturas/factura.entity';
+import { Factura } from '../facturas/factura.entity';
 @Entity({ name: 'viajes' })
 export class Viaje {
   @PrimaryGeneratedColumn()

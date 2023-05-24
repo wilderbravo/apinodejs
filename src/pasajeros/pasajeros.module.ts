@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PasajerosController } from './pasajeros.controller';
 import { PasajerosService } from './pasajeros.service';
 import { Pasajero } from './pasajero.entity';
-import { ConductoresModule } from 'src/conductores/conductores.module';
+import { ConductoresModule } from '../conductores/conductores.module';
 @Module({
   imports: [TypeOrmModule.forFeature([Pasajero]), ConductoresModule],
   controllers: [PasajerosController],

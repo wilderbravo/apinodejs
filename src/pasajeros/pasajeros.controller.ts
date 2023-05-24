@@ -1,8 +1,8 @@
 import { PasajerosService } from './pasajeros.service';
 import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { ParseFloatPipe } from 'src/common/parse-float.pipe';
-import { ParseIntPipe } from 'src/common/parse-int.pipe';
+import { ParseFloatPipe } from '../common/parse-float.pipe';
+import { ParseIntPipe } from '../common/parse-int.pipe';
 @ApiTags('pasajeros')
 @Controller('pasajeros')
 export class PasajerosController {
