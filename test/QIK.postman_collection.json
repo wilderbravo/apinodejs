@@ -121,7 +121,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:3000/viajes/23/completar"
+						"url": "http://localhost:3000/viajes/1/completar"
 					},
 					"response": []
 				}
@@ -151,10 +151,10 @@
 				{
 					"name": "Listar 3 conductores más cercanos",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/pasajeros/5/conductores/?latitud=18.5361206716888&longitud=-69.942848478185",
+							"raw": "http://localhost:3000/pasajeros/conductores/?latitud=18.5361206716888&longitud=-69.942848478185",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -162,7 +162,6 @@
 							"port": "3000",
 							"path": [
 								"pasajeros",
-								"5",
 								"conductores",
 								""
 							],
@@ -191,24 +190,6 @@
 						"method": "GET",
 						"header": [],
 						"url": "http://localhost:3000/facturas"
-					},
-					"response": []
-				},
-				{
-					"name": "Crear Factura",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"fecharegistro\": \"2023-05-23\",\r\n    \"descripcion\": \"Servicio de Transporte\",\r\n    \"valorimpuesto\": 0.12,\r\n    \"descuento\": 0.0594,\r\n    \"subtotal\": 1.926,\r\n    \"total\": 2.1906,\r\n    \"viaje\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:3000/facturas/nuevo"
 					},
 					"response": []
 				}
