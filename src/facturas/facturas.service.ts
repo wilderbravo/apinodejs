@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Factura } from './factura.entity';
@@ -18,7 +18,8 @@ export class FacturasService {
   crearFactura(viajeId: number, total: number) {
     try {
       const fechaActual = new Date();
-      const [descuento, impuesto, subtotal, totalPagar] = this.calcuarValoresFactura(total);
+      const [descuento, impuesto, subtotal, totalPagar] =
+        this.calcuarValoresFactura(total);
       const factura = {
         fecharegistro: fechaActual,
         descripcion: 'Servicio de Transporte',

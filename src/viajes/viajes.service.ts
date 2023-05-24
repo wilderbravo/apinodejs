@@ -66,8 +66,8 @@ export class ViajesService {
       const viajeRegistrado = await this.viajeRepository.save(viaje);
       if (viajeRegistrado) {
         this.facturaService.crearFactura(
-          (await viajeRegistrado).id,
-          (await viajeRegistrado).total,
+          viajeRegistrado.id,
+          viajeRegistrado.total,
         );
         return viajeRegistrado;
       }

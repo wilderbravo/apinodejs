@@ -48,6 +48,6 @@ export class Viaje {
   @ManyToOne(() => Pasajero, (pasajero) => pasajero.viajes)
   pasajero: Pasajero[];
 
-  @OneToMany(() => Factura, (factura) => factura.viaje, { eager: true })
+  @OneToMany(() => Factura, (factura) => factura.viajeId, { eager: true })
   facturas: Factura[];
 }

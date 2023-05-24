@@ -33,5 +33,5 @@ export class Factura {
   total: number;
 
   @ManyToOne(() => Viaje, (viaje) => viaje.facturas)
-  viaje: Viaje[];
+  viajeId: number;
 }
