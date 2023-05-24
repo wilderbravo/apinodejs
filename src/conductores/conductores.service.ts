@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, Logger } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Conductor } from './conductor.entity';
@@ -44,13 +44,12 @@ export class ConductoresService {
 
     return conductor;
   }
-
   async obtenerConductoresDisponiblesNKilometros(
     latitud: number,
     longitud: number,
     kilometros: number,
   ) {
-    let conductoresHabilitados = [];
+    const conductoresHabilitados = [];
     const conductores = await this.conductorRepository.find({
       where: {
         disponible: true,
@@ -76,13 +75,9 @@ export class ConductoresService {
     return conductoresHabilitados;
   }
 
-  async obtenerConductoresCercanos(
-    latitud: number,
-    longitud: number,
-    id: number,
-  ) {
-    let conductoresCercanos = [];
-    let tresConductoresCercanos = [];
+  async obtenerConductoresCercanos(latitud: number, longitud: number) {
+    const conductoresCercanos = [];
+    const tresConductoresCercanos = [];
     const conductores = await this.conductorRepository.find({
       where: {
         disponible: true,

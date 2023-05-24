@@ -1,5 +1,5 @@
 import { PasajerosService } from './pasajeros.service';
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { ParseFloatPipe } from 'src/common/parse-float.pipe';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
@@ -20,22 +20,17 @@ export class PasajerosController {
     return this.pasajerosService.obtenerPasajeroPorId(pasajeroId);
   }
 
-  @Get(':pasajeroId/conductores')
+  @Post('conductores')
   @ApiOperation({ summary: 'Lista los 3 conductores más cerca del pasajero' })
   async getConductoresCercanos(
-    @Param('pasajeroId', ParseIntPipe) pasajeroId: number,
     @Query('latitud', ParseFloatPipe) latitud,
     @Query('longitud', ParseFloatPipe) longitud,
   ) {
     return await this.pasajerosService.obtenerTresPasajerosMasCerca(
       latitud,
       longitud,
-      pasajeroId
     );
   }
 
-  // No envisr fecha, se crea por dentro
-  // La factura también por ID
   // Agregar try catch
-
 }

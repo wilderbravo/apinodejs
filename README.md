@@ -25,7 +25,7 @@ Posteriormente se debe descargar el proyecto que se encuentra alojado en [Bitbuc
 git clone https://wilderbravo@bitbucket.org/wilderbravo/taxi24.git
 ```
 
-Una vez descargado el código fuente, ingrese a la carpeta del proyecto **taxi24** y luego actualice las dependencias ejecutando el comando:
+Tomar en cuenta que la rama principal es la rama **master**. Una vez descargado el código fuente, ingrese a la carpeta del proyecto **taxi24** y luego actualice las dependencias ejecutando el comando:
 
 ```bash
 npm install

@@ -31,13 +31,13 @@ export class ConductoresController {
     summary: 'Lista de conductores ubicados a un rango de 3 kilómetros',
   })
   async getDatos(
-    @Query('latitud', ParseFloatPipe) latitud: 100,
-    @Query('longitud', ParseFloatPipe) longitud: 100,
+    @Query('latitud', ParseFloatPipe) latitud,
+    @Query('longitud', ParseFloatPipe) longitud,
   ) {
     return await this.conductoresService.obtenerConductoresDisponiblesNKilometros(
       latitud,
       longitud,
-      3
+      3,
     );
   }
 
